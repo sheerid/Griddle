@@ -1,7 +1,7 @@
 {
-  "name": "griddle-react",
-  "version": "0.7.1",
-  "description": "Griddle - A fast and flexible grid component for React.",
+  "name": "@sheerid/griddle-react",
+  "version": "0.1.2",
+  "description": "Griddle - A fast and flexible grid component for React.  Forked and enhanced by SheerID for internal use only.",
   "keywords": [
     "react-component",
     "grid",
