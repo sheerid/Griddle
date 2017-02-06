@@ -44,6 +44,11 @@ var GridRow = React.createClass({
             this.props.toggleChildren();
         }
     },
+    handleDoubleClick: function handleDoubleClick(e) {
+        if (this.props.onRowDoubleClick !== null && isFunction(this.props.onRowDoubleClick)) {
+            this.props.onRowDoubleClick(this, e);
+        }
+    },
     handleSelectionChange: function handleSelectionChange(e) {
         //hack to get around warning that's not super useful in this case
         return;
@@ -111,13 +116,13 @@ var GridRow = React.createClass({
             if (_this.props.columnSettings.hasColumnMetadata() && typeof meta !== 'undefined' && meta !== null) {
                 if (typeof meta.customComponent !== 'undefined' && meta.customComponent !== null) {
                     var customComponent = React.createElement(meta.customComponent, { data: col[1], rowData: dataView, metadata: meta });
-                    returnValue = React.createElement('td', { onClick: _this.handleClick, className: meta.cssClassName, key: index, style: columnStyles }, customComponent);
+                    returnValue = React.createElement('td', { onClick: _this.handleClick, onDoubleClick: _this.handleDoubleClick, className: meta.cssClassName, key: index, style: columnStyles }, customComponent);
                 } else {
-                    returnValue = React.createElement('td', { onClick: _this.handleClick, className: meta.cssClassName, key: index, style: columnStyles }, firstColAppend, _this.formatData(col[1]));
+                    returnValue = React.createElement('td', { onClick: _this.handleClick, onDoubleClick: _this.handleDoubleClick, className: meta.cssClassName, key: index, style: columnStyles }, firstColAppend, _this.formatData(col[1]));
                 }
             }
 
-            return returnValue || React.createElement('td', { onClick: _this.handleClick, key: index, style: columnStyles }, firstColAppend, col[1]);
+            return returnValue || React.createElement('td', { onClick: _this.handleClick, onDoubleClick: _this.handleDoubleClick, key: index, style: columnStyles }, firstColAppend, col[1]);
         });
 
         // Don't compete with onRowClick, but if no onRowClick function then
