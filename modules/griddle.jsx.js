@@ -131,6 +131,7 @@ var Griddle = React.createClass({
             "isSubGriddle": false,
             "enableSort": true,
             "onRowClick": null,
+            "onRowDoubleClick": null,
             /* css class names */
             "sortAscendingClassName": "sort-ascending",
             "sortDescendingClassName": "sort-descending",
