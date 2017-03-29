@@ -4,7 +4,6 @@
    Copyright (c) 2014 Ryan Lanciaux | DynamicTyped
 
    See License / Disclaimer https://raw.githubusercontent.com/DynamicTyped/Griddle/master/LICENSE
- ** modified by coatsbj to support double-click **
 */
 'use strict';
 
@@ -131,7 +130,6 @@ var Griddle = React.createClass({
             "isSubGriddle": false,
             "enableSort": true,
             "onRowClick": null,
-            "onRowDoubleClick": null,
             /* css class names */
             "sortAscendingClassName": "sort-ascending",
             "sortDescendingClassName": "sort-descending",
@@ -853,8 +851,7 @@ var Griddle = React.createClass({
             externalLoadingComponent: this.props.externalLoadingComponent,
             externalIsLoading: this.props.externalIsLoading,
             hasMorePages: hasMorePages,
-            onRowClick: this.props.onRowClick,
-            onRowDoubleClick: this.props.onRowDoubleClick}));
+            onRowClick: this.props.onRowClick }));
     },
     getContentSection: function getContentSection(data, cols, meta, pagingContent, hasMorePages, globalData) {
         if (this.shouldUseCustomGridComponent() && this.props.customGridComponent !== null) {

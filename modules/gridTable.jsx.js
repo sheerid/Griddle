@@ -1,6 +1,5 @@
 /*
    See License / Disclaimer https://raw.githubusercontent.com/DynamicTyped/Griddle/master/LICENSE
-   ** modified by coatsbj to support double-click **
 */
 'use strict';
 
@@ -40,8 +39,7 @@ var GridTable = React.createClass({
       "parentRowExpandedComponent": "▼",
       "externalLoadingComponent": null,
       "externalIsLoading": false,
-      "onRowClick": null,
-      "onRowDoubleClick": null
+      "onRowClick": null
     };
   },
   getInitialState: function getInitialState() {
@@ -161,8 +159,7 @@ var GridTable = React.createClass({
           rowHeight: that.props.rowHeight,
           hasChildren: hasChildren,
           tableClassName: that.props.className,
-          onRowClick: that.props.onRowClick,
-          onRowDoubleClick: that.props.onRowDoubleClick
+          onRowClick: that.props.onRowClick
         });
       });
 

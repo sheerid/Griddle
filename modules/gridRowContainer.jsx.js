@@ -1,6 +1,5 @@
 /*
    See License / Disclaimer https://raw.githubusercontent.com/DynamicTyped/Griddle/master/LICENSE
-   ** modified by coatsbj to support double-click **
 */
 'use strict';
 
@@ -79,7 +78,6 @@ var GridRowContainer = React.createClass({
       paddingHeight: that.props.paddingHeight,
       rowHeight: that.props.rowHeight,
       onRowClick: that.props.onRowClick,
-      onRowDoubleClick: that.props.onRowDoubleClick,
       multipleSelectionSettings: this.props.multipleSelectionSettings }));
 
     var children = null;
