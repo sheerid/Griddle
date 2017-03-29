@@ -1,6 +1,6 @@
 {
   "name": "@sheerid/griddle-react",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Griddle - A fast and flexible grid component for React.  Forked and enhanced by SheerID for internal use only.",
   "keywords": [
     "react-component",
@@ -52,12 +52,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/GriddleGriddle/Griddle.git"
+    "url": "git://github.com/sheerid/Griddle.git"
   },
-  "author": "GriddleGriddle",
+  "author": "coatsbj",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/GriddleGriddle/Griddle/issues"
+    "url": "https://github.com/sheerid/Griddle/issues"
   },
-  "homepage": "https://github.com/GriddleGriddle/Griddle"
+  "homepage": "https://github.com/sheerid/Griddle"
 }

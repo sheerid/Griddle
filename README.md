@@ -2,7 +2,7 @@
 [![Stories in Discussion](https://badge.waffle.io/GriddleGriddle/Griddle.svg?label=ready&title=Discussion)](http://waffle.io/GriddleGriddle/Griddle)
 Griddle
 =======
-#### [Take a brief look at what's coming in Griddle v1.0](https://github.com/GriddleGriddle/Griddle/issues/276) ####
+#### [Take a brief look at what's coming in Griddle v1.0](https://github.com/sheerid/Griddle/issues/276) ####
 ----------
 
 Join us here [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/DynamicTyped/Griddle?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -11,13 +11,13 @@ Join us here [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.
 
 ----------
 
-Griddle is a simple grid Component for use with React. It depends on [Lodash Modules](https://lodash.com/) and [React](http://facebook.github.io/react/).
+Griddle is a simple grid Component for use with React. It depends on [Lodash Modules](https://lodash.com/) and [React](http://facebook.github.io/react/).  This repo has been forked by SheerID for private use to include certain enhancements necessary to support internal requirements.
 
 Please check out the [documentation and examples](http://dynamictyped.github.io/Griddle).
 
 To use Griddle:
 
-`npm install griddle-react`
+`npm install @sheerid/griddle-react`
 
 ***Or***
 
@@ -36,6 +36,9 @@ To run from source, type the following commands into a terminal:
 
 Griddle is not yet version 1. There are likely some areas that will change and some issues that you may encounter. Please submit issues / pull requests for anything you run into.
 
+This copy has been forked from GriddleGriddle/Griddle to add support for row double-click and 
+potentially other functionality needed for SheerID use.
+
 ----------
 ###Contributing:###
 
@@ -43,6 +46,10 @@ Please feel free submit any bugs or suggestions as issues. If you are having pro
 
 ----------
 ###Changelog:###
+
+0.1.2 (post-fork)
+**Add**
+* double-click functionality for Griddle rows
 
 0.6.0
 
