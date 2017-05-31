@@ -31,6 +31,7 @@ var GridRow = React.createClass({
         "parentRowCollapsedComponent": "▶",
         "parentRowExpandedComponent": "▼",
         "onRowClick": null,
+        "onRowDoubleClick": null,
 	    "multipleSelectionSettings": null
       }
     },

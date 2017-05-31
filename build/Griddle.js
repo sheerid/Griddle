@@ -7816,6 +7816,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            "parentRowCollapsedComponent": "▶",
 	            "parentRowExpandedComponent": "▼",
 	            "onRowClick": null,
+	            "onRowDoubleClick": null,
 	            "multipleSelectionSettings": null
 	        };
 	    },
