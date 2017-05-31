@@ -1,6 +1,7 @@
 /*
    See License / Disclaimer https://raw.githubusercontent.com/DynamicTyped/Griddle/master/LICENSE
-*/
+   ** modified by coatsbj to support double-click **
+ */
 var React = require('react');
 var ColumnProperties = require('./columnProperties.js');
 var pick = require('lodash/pick');
@@ -20,7 +21,8 @@ var GridRowContainer = React.createClass({
         "parentRowCollapsedComponent": "▶",
         "parentRowExpandedComponent": "▼",
         "onRowClick": null,
-	    "multipleSelectionSettings": null
+        "onRowDoubleClick": null,
+        "multipleSelectionSettings": null
       };
     },
     getInitialState: function(){
@@ -74,6 +76,7 @@ var GridRowContainer = React.createClass({
           paddingHeight={that.props.paddingHeight}
           rowHeight={that.props.rowHeight}
           onRowClick={that.props.onRowClick}
+          onRowDoubleClick={that.props.onRowDoubleClick}
           multipleSelectionSettings={this.props.multipleSelectionSettings} />
       );
 

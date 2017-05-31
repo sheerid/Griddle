@@ -4,7 +4,8 @@
    Copyright (c) 2014 Ryan Lanciaux | DynamicTyped
 
    See License / Disclaimer https://raw.githubusercontent.com/DynamicTyped/Griddle/master/LICENSE
-*/
+   ** modified by coatsbj to support double-click AND to support a fix for grid resizing issues when in virtual scrolling mode **
+ */
 var React = require('react');
 var GridTable = require('./gridTable.jsx');
 var GridFilter = require('./gridFilter.jsx');
@@ -116,6 +117,8 @@ var Griddle = React.createClass({
             "isSubGriddle": false,
             "enableSort": true,
             "onRowClick": null,
+            "onRowDoubleClick": null,
+            "applyGridResizeFix": false,
             /* css class names */
             "sortAscendingClassName": "sort-ascending",
             "sortDescendingClassName": "sort-descending",
@@ -732,7 +735,7 @@ var Griddle = React.createClass({
 			getIsSelectAllChecked: this._getIsSelectAllChecked,
 			toggleSelectRow: this._toggleSelectRow,
 			getSelectedRowIds: this.getSelectedRowIds,
-      getIsRowChecked: this._getIsRowChecked
+            getIsRowChecked: this._getIsRowChecked
 		}
 	},
     isInfiniteScrollEnabled: function(){
@@ -877,7 +880,9 @@ var Griddle = React.createClass({
                 externalLoadingComponent={this.props.externalLoadingComponent}
                 externalIsLoading={this.props.externalIsLoading}
                 hasMorePages={hasMorePages}
-                onRowClick={this.props.onRowClick}/></div>)
+                onRowClick={this.props.onRowClick}
+                onRowDoubleClick={this.props.onRowDoubleClick}
+                applyGridResizeFix={this.props.applyGridResizeFix}/></div>)
     },
     getContentSection: function(data, cols, meta, pagingContent, hasMorePages, globalData){
         if(this.shouldUseCustomGridComponent() && this.props.customGridComponent !== null){

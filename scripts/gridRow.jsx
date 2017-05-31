@@ -1,6 +1,7 @@
 /*
    See License / Disclaimer https://raw.githubusercontent.com/DynamicTyped/Griddle/master/LICENSE
-*/
+   ** modified by coatsbj to support double-click **
+ */
 var React = require('react');
 var ColumnProperties = require('./columnProperties.js');
 var deep = require('./deep.js');
@@ -38,6 +39,11 @@ var GridRow = React.createClass({
             this.props.onRowClick(this, e);
         }else if(this.props.hasChildren){
             this.props.toggleChildren();
+        }
+    },
+    handleDoubleClick: function handleDoubleClick(e) {
+        if (this.props.onRowDoubleClick !== null && isFunction(this.props.onRowDoubleClick)) {
+            this.props.onRowDoubleClick(this, e);
         }
     },
     handleSelectionChange: function(e) {
@@ -108,13 +114,13 @@ var GridRow = React.createClass({
             if (this.props.columnSettings.hasColumnMetadata() && typeof meta !== 'undefined' && meta !== null) {
               if (typeof meta.customComponent !== 'undefined' && meta.customComponent !== null) {
                 var customComponent = <meta.customComponent data={col[1]} rowData={dataView} metadata={meta} />;
-                returnValue = <td onClick={this.handleClick} className={meta.cssClassName} key={index} style={columnStyles}>{customComponent}</td>;
+                returnValue = <td onClick={this.handleClick} onDoubleClick={this.handleDoubleClick} className={meta.cssClassName} key={index} style={columnStyles}>{customComponent}</td>;
               } else {
-                returnValue = <td onClick={this.handleClick} className={meta.cssClassName} key={index} style={columnStyles}>{firstColAppend}{this.formatData(col[1])}</td>;
+                returnValue = <td onClick={this.handleClick} onDoubleClick={this.handleDoubleClick} className={meta.cssClassName} key={index} style={columnStyles}>{firstColAppend}{this.formatData(col[1])}</td>;
               }
             }
 
-            return returnValue || (<td onClick={this.handleClick} key={index} style={columnStyles}>{firstColAppend}{col[1]}</td>);
+            return returnValue || (<td onClick={this.handleClick} onDoubleClick={this.handleDoubleClick} key={index} style={columnStyles}>{firstColAppend}{col[1]}</td>);
         });
 
         // Don't compete with onRowClick, but if no onRowClick function then
