@@ -1,6 +1,7 @@
 /*
    See License / Disclaimer https://raw.githubusercontent.com/DynamicTyped/Griddle/master/LICENSE
-*/
+ ** modified by coatsbj to support double-click AND to support a fix for grid resizing issues when in virtual scrolling mode **
+ */
 var React = require('react');
 var GridTitle = require('./gridTitle.jsx');
 var GridRowContainer = require('./gridRowContainer.jsx');
@@ -35,7 +36,9 @@ var GridTable = React.createClass({
       "parentRowExpandedComponent": "▼",
       "externalLoadingComponent": null,
       "externalIsLoading": false,
-      "onRowClick": null
+      "onRowClick": null,
+      "onRowDoubleClick": null,
+      "applyGridResizeFix": false
     }
   },
   getInitialState: function(){
@@ -52,6 +55,22 @@ var GridTable = React.createClass({
   componentDidUpdate: function(prevProps, prevState) {
     // After the subsequent renders, see if we need to load additional pages.
     this.gridScroll();
+  },
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+      // [BJC, 5/31/2017] NOTE: The following is to ensure grid re-renders upon large-magnitude resize operation when grid was previously quite small in size
+      // [BJC, 5/31/2017] NOTE: Because changing state will force a re-render, we ONLY want to do it if it's ABSOLUTELY necessary
+      if (this.props.applyGridResizeFix
+          && this.props.enableInfiniteScroll
+          && nextProps.enableInfiniteScroll
+          && this.refs.scrollable
+          && nextProps.bodyHeight !== this.props.bodyHeight
+          && this.refs.scrollable.scrollHeight > this.refs.scrollable.clientHeight
+          && (nextProps.bodyHeight - this.state.clientHeight) > nextProps.rowHeight) {
+          this.setState({
+              clientHeight: nextProps.bodyHeight,
+              scrollHeight: (nextProps.bodyHeight > this.state.scrollHeight) ? nextProps.bodyHeight : this.state.scrollHeight
+          });
+      }
   },
   gridScroll: function(){
     if (this.props.enableInfiniteScroll && !this.props.externalIsLoading) {
@@ -75,7 +94,7 @@ var GridTable = React.createClass({
         this.setState(newState);
       }
 
-      // Determine the diff by subtracting the amount scrolled by the total height, taking into consideratoin
+      // Determine the diff by subtracting the amount scrolled by the total height, taking into consideration
       // the spacer's height.
       var scrollHeightDiff = scrollHeight - (scrollTop + clientHeight) - this.props.infiniteScrollLoadTreshold;
 
@@ -152,11 +171,12 @@ var GridTable = React.createClass({
                 columnSettings={that.props.columnSettings}
                 rowSettings={that.props.rowSettings}
                 paddingHeight={that.props.paddingHeight}
-		            multipleSelectionSettings={that.props.multipleSelectionSettings}
+                multipleSelectionSettings={that.props.multipleSelectionSettings}
                 rowHeight={that.props.rowHeight}
                 hasChildren={hasChildren}
                 tableClassName={that.props.className}
                 onRowClick={that.props.onRowClick}
+                onRowDoubleClick={that.props.onRowDoubleClick}
             />
           )
       });

@@ -1,7 +1,7 @@
 /*
    See License / Disclaimer https://raw.githubusercontent.com/DynamicTyped/Griddle/master/LICENSE
-   ** modified by coatsbj to support double-click **
-*/
+ ** modified by coatsbj to support double-click AND to support a fix for grid resizing issues when in virtual scrolling mode **
+ */
 'use strict';
 
 var React = require('react');
@@ -41,7 +41,8 @@ var GridTable = React.createClass({
       "externalLoadingComponent": null,
       "externalIsLoading": false,
       "onRowClick": null,
-      "onRowDoubleClick": null
+      "onRowDoubleClick": null,
+      "applyGridResizeFix": false
     };
   },
   getInitialState: function getInitialState() {
@@ -58,6 +59,16 @@ var GridTable = React.createClass({
   componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
     // After the subsequent renders, see if we need to load additional pages.
     this.gridScroll();
+  },
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    // [BJC, 5/31/2017] NOTE: The following is to ensure grid re-renders upon large-magnitude resize operation when grid was previously quite small in size
+    // [BJC, 5/31/2017] NOTE: Because changing state will force a re-render, we ONLY want to do it if it's ABSOLUTELY necessary
+    if (this.props.applyGridResizeFix && this.props.enableInfiniteScroll && nextProps.enableInfiniteScroll && this.refs.scrollable && nextProps.bodyHeight !== this.props.bodyHeight && this.refs.scrollable.scrollHeight > this.refs.scrollable.clientHeight && nextProps.bodyHeight - this.state.clientHeight > nextProps.rowHeight) {
+      this.setState({
+        clientHeight: nextProps.bodyHeight,
+        scrollHeight: nextProps.bodyHeight > this.state.scrollHeight ? nextProps.bodyHeight : this.state.scrollHeight
+      });
+    }
   },
   gridScroll: function gridScroll() {
     if (this.props.enableInfiniteScroll && !this.props.externalIsLoading) {
@@ -79,7 +90,7 @@ var GridTable = React.createClass({
         this.setState(newState);
       }
 
-      // Determine the diff by subtracting the amount scrolled by the total height, taking into consideratoin
+      // Determine the diff by subtracting the amount scrolled by the total height, taking into consideration
       // the spacer's height.
       var scrollHeightDiff = scrollHeight - (scrollTop + clientHeight) - this.props.infiniteScrollLoadTreshold;
 
